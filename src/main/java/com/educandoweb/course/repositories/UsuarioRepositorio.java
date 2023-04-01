@@ -5,6 +5,4 @@ import com.educandoweb.course.entities.Usuario;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 	
-	
-
 }

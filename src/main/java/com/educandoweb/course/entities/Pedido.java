@@ -3,6 +3,9 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+
+import com.educandoweb.course.entities.enums.StatusPedido;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +22,8 @@ public class Pedido implements Serializable {
 	private Long id;
 	private Instant momento;
 	
+	private Integer status;
+	
 	@ManyToOne
 	@JoinColumn(name = "cliente_Id")
 	private Usuario cliente;
@@ -27,10 +32,11 @@ public class Pedido implements Serializable {
 		
 	}
 
-	public Pedido(Long id, Instant momento, Usuario cliente) {
+	public Pedido(Long id, Instant momento, StatusPedido status, Usuario cliente) {
 		super();
 		this.id = id;
 		this.momento = momento;
+		setStatus(status);
 		this.cliente = cliente;
 	}
 
@@ -48,6 +54,16 @@ public class Pedido implements Serializable {
 
 	public void setMomento(Instant momento) {
 		this.momento = momento;
+	}
+
+	public StatusPedido getStatus() {
+		return StatusPedido.valorDe(status);
+	}
+
+	public void setStatus(StatusPedido status) {
+		if(status != null) {
+		   this.status = status.getCode();
+		}
 	}
 
 	public Usuario getCliente() {

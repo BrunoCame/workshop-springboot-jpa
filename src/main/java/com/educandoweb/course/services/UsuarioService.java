@@ -17,7 +17,7 @@ public class UsuarioService {
 		return repositorio.findAll();
 	}
 	
-	public Usuario encontrePorid(Long Id) {
+	public Usuario encontrePorId(Long Id) {
 		Optional<Usuario> obj = repositorio.findById(Id);
 		return obj.get();
 	}

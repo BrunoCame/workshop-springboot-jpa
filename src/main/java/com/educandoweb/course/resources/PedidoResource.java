@@ -1,34 +1,36 @@
 package com.educandoweb.course.resources;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.educandoweb.course.entities.Usuario;
-import com.educandoweb.course.services.UsuarioService;
+import com.educandoweb.course.entities.Pedido;
+import com.educandoweb.course.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
-public class UsuarioResource {
-
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
+	
 	@Autowired
-	private UsuarioService service;
-
+	private PedidoService service;
+	
 	@GetMapping
-	public ResponseEntity<List<Usuario>> acharTodos() {
-		List<Usuario> lista = service.encontreTodos();
-		return ResponseEntity.ok().body(lista);
+	public ResponseEntity<List<Pedido>>findAll(){
+		List<Pedido>list = service.procurarTodos();
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> acharPorId(@PathVariable Long id){
-		Usuario obj = service.encontrePorId(id);
-		return ResponseEntity.ok().body(obj);	
+	public ResponseEntity<Pedido>findById(@PathVariable Long Id){
+		Pedido obj = service.procurarPorId(Id);
+		return ResponseEntity.ok().body(obj);
 	}
+	
+
+	
+	
 
 }

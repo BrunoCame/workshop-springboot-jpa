@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -103,6 +102,5 @@ public class Produto implements Serializable {
 			return false;
 		Produto other = (Produto) obj;
 		return Objects.equals(Id, other.Id);
-	}
-	
+	}	
 }

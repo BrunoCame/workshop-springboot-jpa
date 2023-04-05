@@ -81,4 +81,8 @@ public class ItemPedido implements Serializable{
 		ItemPedido other = (ItemPedido) obj;
 		return Objects.equals(id, other.id);
 	}	
+	
+	public double getSubTotal() {
+		return preco * quantidade;
+	}
 }

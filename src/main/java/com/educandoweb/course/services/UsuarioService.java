@@ -17,13 +17,29 @@ public class UsuarioService {
 		return repositorio.findAll();
 	}
 	
-	public Usuario encontrePorId(Long Id) {
-		Optional<Usuario> obj = repositorio.findById(Id);
+	public Usuario encontrePorId(Long id) {
+		Optional<Usuario> obj = repositorio.findById(id);
 		return obj.get();
 	}
 	
 	public Usuario inserir(Usuario obj) {
 		return repositorio.save(obj);
+	}
+	
+	public void delete(Long id) {
+		repositorio.deleteById(id);
+	}
+	
+	public Usuario update(Long id, Usuario obj) {
+		Usuario entity = repositorio.getReferenceById(id);
+		updateDados(entity, obj);
+		return repositorio.save(entity);
+	}
+	
+	private void updateDados(Usuario entity, Usuario obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setTelefone(obj.getTelefone());
 	}
 
 	

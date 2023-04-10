@@ -24,35 +24,35 @@ public class UsuarioResource {
 
 	@Autowired
 	private UsuarioService service;
-
+	
 	@GetMapping
-	public ResponseEntity<List<Usuario>> findAll(){
-		List<Usuario>obj = service.encontreTodos();
+	public ResponseEntity<List<Usuario>>findAll(){
+		List<Usuario> obj = service.encontreTodos();
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> findById(@PathVariable Long id){
+	public ResponseEntity<Usuario>findById(@PathVariable Long id){
 		Usuario obj = service.encontrePorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario> insert(@RequestBody Usuario obj){
+	public ResponseEntity<Usuario>insert(@RequestBody Usuario obj){
 		obj = service.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);	
+		return ResponseEntity.created(uri).body(obj);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void>delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario obj){
+	@PutMapping(value = "/[id]")
+	public ResponseEntity<Usuario>update(@PathVariable Long id, @RequestBody Usuario obj){
 		service.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(obj);		
 	}
 }

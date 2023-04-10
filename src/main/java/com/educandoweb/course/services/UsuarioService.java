@@ -13,6 +13,8 @@ import com.educandoweb.course.repositories.UsuarioRepositorio;
 import com.educandoweb.course.resources.exceptions.DataBaseException;
 import com.educandoweb.course.resourcesNotFoundExcpetion.ResourceNaoAchaExcessao;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UsuarioService {
 	
@@ -32,7 +34,6 @@ public class UsuarioService {
 		return repositorio.save(obj);
 	}
 	
-	
 	public void delete(Long id) {
 		
 		try{
@@ -47,15 +48,19 @@ public class UsuarioService {
 	}
 	
 	public Usuario update(Long id, Usuario obj) {
-		Usuario entity = repositorio.getReferenceById(id);
-		updateDados(entity, obj);
-		return repositorio.save(entity);
+		try{
+		    Usuario entity = repositorio.getReferenceById(id);
+		    updateDados(entity, obj);
+		    return repositorio.save(entity);
+		}
+		catch(EntityNotFoundException e) {
+			throw new ResourceNaoAchaExcessao(id);
+		}
 	}
-
+	
 	private void updateDados(Usuario entity, Usuario obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
-		entity.setTelefone(obj.getTelefone());	
-	}
-	
+		entity.setTelefone(obj.getTelefone());
+	}	
 }
